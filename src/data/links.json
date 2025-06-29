@@ -1,0 +1,139 @@
+{
+  "categories": [
+    {
+      "name": "Official Resources",
+      "subcategories": [
+        {
+          "name": "Main Sites",
+          "links": [
+            {
+              "title": "ZAO Network",
+              "url": "https://zao.network",
+              "description": "Official website of the ZAO Network"
+            },
+            {
+              "title": "ZAO Documentation",
+              "url": "https://docs.zao.network",
+              "description": "Official documentation for ZAO Network"
+            },
+            {
+              "title": "ZAO GitHub",
+              "url": "https://github.com/zaonetwork",
+              "description": "Official GitHub repositories for ZAO Network"
+            }
+          ]
+        },
+        {
+          "name": "Social Media",
+          "links": [
+            {
+              "title": "Twitter",
+              "url": "https://twitter.com/zaonetwork",
+              "description": "Official Twitter account of ZAO Network"
+            },
+            {
+              "title": "Discord",
+              "url": "https://discord.gg/zao",
+              "description": "Official Discord server for ZAO Network"
+            },
+            {
+              "title": "Telegram",
+              "url": "https://t.me/zaonetwork",
+              "description": "Official Telegram group for ZAO Network"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DeFi",
+      "subcategories": [
+        {
+          "name": "DEXs",
+          "links": [
+            {
+              "title": "Uniswap",
+              "url": "https://app.uniswap.org/#/swap?outputCurrency=0x1234567890123456789012345678901234567890",
+              "description": "Trade ZAO tokens on Uniswap"
+            },
+            {
+              "title": "SushiSwap",
+              "url": "https://app.sushi.com/swap?outputCurrency=0x1234567890123456789012345678901234567890",
+              "description": "Trade ZAO tokens on SushiSwap"
+            }
+          ]
+        },
+        {
+          "name": "Lending",
+          "links": [
+            {
+              "title": "Aave",
+              "url": "https://app.aave.com",
+              "description": "Lending and borrowing platform"
+            },
+            {
+              "title": "Compound",
+              "url": "https://app.compound.finance",
+              "description": "Lending and borrowing platform"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NFTs",
+      "subcategories": [
+        {
+          "name": "Marketplaces",
+          "links": [
+            {
+              "title": "OpenSea",
+              "url": "https://opensea.io/collection/zao",
+              "description": "ZAO NFTs on OpenSea"
+            },
+            {
+              "title": "Rarible",
+              "url": "https://rarible.com/zao",
+              "description": "ZAO NFTs on Rarible"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tools",
+      "subcategories": [
+        {
+          "name": "Analytics",
+          "links": [
+            {
+              "title": "Dune Analytics",
+              "url": "https://dune.com/zao",
+              "description": "ZAO analytics dashboards"
+            },
+            {
+              "title": "DefiLlama",
+              "url": "https://defillama.com/protocol/zao",
+              "description": "ZAO TVL and statistics"
+            }
+          ]
+        },
+        {
+          "name": "Portfolio Trackers",
+          "links": [
+            {
+              "title": "Zapper",
+              "url": "https://zapper.fi",
+              "description": "Track your ZAO portfolio"
+            },
+            {
+              "title": "DeBank",
+              "url": "https://debank.com",
+              "description": "Track your ZAO portfolio"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
