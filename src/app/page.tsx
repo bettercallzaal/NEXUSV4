@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { TokenChecker } from "@/components/token-checker";
@@ -18,6 +19,7 @@ export default function Home() {
     loanz: { formattedBalance: string; hasMinimum: boolean };
   } | null>(null);
   const [isTestingWallet, setIsTestingWallet] = useState(false);
+  const [showLinksSection, setShowLinksSection] = useState(true);
 
   // Handle wallet connection
   const handleWalletConnected = (address: string) => {
@@ -149,6 +151,30 @@ export default function Home() {
           </CardContent>
         </Card>
       </div>
+      
+      {showLinksSection && (
+        <div className="mt-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Explore ZAO Ecosystem Links</CardTitle>
+              <CardDescription>Access our comprehensive collection of 5000+ curated links</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-4">
+                <p>
+                  The ZAO Nexus Links section provides access to over 5000 curated links organized by categories and subcategories.
+                  Explore resources across DeFi, NFTs, Tools, Education, and more with our high-performance link browser.
+                </p>
+                <div className="flex justify-center">
+                  <Link href="/links">
+                    <Button className="mt-2">Browse All Links</Button>
+                  </Link>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </main>
   );
 }
