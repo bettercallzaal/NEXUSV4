@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { WalletConnect } from "@/components/wallet/wallet-connect";
+import { WalletConnectButton } from "@/components/wallet/connect-button";
 import { ClientOnly } from "@/components/client-only";
 
 export function Header() {
@@ -37,7 +37,7 @@ export function Header() {
         </div>
         <div className="flex items-center gap-4">
           <ClientOnly>
-            <WalletConnect />
+            <WalletConnectButton />
           </ClientOnly>
           <ThemeToggle />
         </div>

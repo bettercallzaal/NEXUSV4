@@ -13,16 +13,13 @@ export default function LinksPage() {
   useEffect(() => {
     async function loadLinks() {
       try {
-        // Try to load the large dataset first
-        const response = await fetch('/api/links?dataset=large');
+        // Only load the default dataset
+        const response = await fetch('/api/links');
         if (response.ok) {
           const data = await response.json();
           setLinksData(data);
         } else {
-          // Fall back to the default dataset
-          const fallbackResponse = await fetch('/api/links');
-          const data = await fallbackResponse.json();
-          setLinksData(data);
+          throw new Error('Failed to load links');
         }
       } catch (error) {
         console.error("Error loading links:", error);
