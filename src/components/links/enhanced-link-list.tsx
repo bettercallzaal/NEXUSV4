@@ -84,20 +84,20 @@ export function EnhancedLinkList({ data: initialData }: EnhancedLinkListProps) {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Links</h2>
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-[#8a2be2] to-[#00f5ff] bg-clip-text text-transparent">Links</h2>
         <AddLinkDialog data={data} onAddLink={handleAddLink} />
       </div>
       
       {allTags.length > 0 && (
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium">Filter by tags:</span>
+            <span className="text-sm font-medium text-[#00f5ff]">Filter by tags:</span>
             {activeTags.length > 0 && (
               <Button 
-                variant="ghost" 
+                variant="outline" 
                 size="sm" 
                 onClick={() => setActiveTags([])}
-                className="h-6 px-2 text-xs"
+                className="h-6 px-2 text-xs border-[#8a2be2] text-[#00f5ff] hover:bg-[#8a2be2]/10 hover:text-[#00f5ff]"
               >
                 Clear filters
               </Button>
@@ -107,8 +107,8 @@ export function EnhancedLinkList({ data: initialData }: EnhancedLinkListProps) {
             {allTags.map((tag) => (
               <Badge 
                 key={tag}
-                variant={activeTags.includes(tag) ? "default" : "secondary"}
-                className={`cursor-pointer ${activeTags.includes(tag) ? 'bg-primary' : ''}`}
+                variant={activeTags.includes(tag) ? "zao-accent" : "zao-subtle"}
+                className="cursor-pointer hover:shadow-md transition-all duration-200"
                 onClick={() => toggleTag(tag)}
               >
                 {tag}

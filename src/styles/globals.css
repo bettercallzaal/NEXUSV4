@@ -4,33 +4,34 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* ZAO-inspired dark theme */
+    --background: 240 20% 3%; /* Near black with slight blue tint #050508 */
+    --foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 20% 6%; /* Slightly lighter than background #0c0c14 */
+    --card-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 20% 6%; /* Slightly lighter than background #0c0c14 */
+    --popover-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 265 80% 60%; /* ZAO purple #8a2be2 */
+    --primary-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 260 60% 30%; /* Darker purple #362a84 */
+    --secondary-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 20% 12%; /* Muted background #1c1c2a */
+    --muted-foreground: 240 5% 65%; /* Muted text #a0a0a8 */
 
-    --accent: 183 100% 50%; /* ZAO neon accent #00F5FF */
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 183 100% 50%; /* ZAO neon cyan accent #00f5ff */
+    --accent-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%; /* Red #f03e3e */
+    --destructive-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 20% 12%; /* Subtle border #1c1c2a */
+    --input: 240 20% 12%; /* Input background #1c1c2a */
+    --ring: 265 80% 60%; /* Ring matches primary #8a2be2 */
 
     --radius: 0.5rem;
   }
@@ -41,33 +42,34 @@
   }
   
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* ZAO-inspired dark theme - same as root since we're defaulting to dark */
+    --background: 240 20% 3%; /* Near black with slight blue tint #050508 */
+    --foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 20% 6%; /* Slightly lighter than background #0c0c14 */
+    --card-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 20% 6%; /* Slightly lighter than background #0c0c14 */
+    --popover-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 265 80% 60%; /* ZAO purple #8a2be2 */
+    --primary-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 260 60% 30%; /* Darker purple #362a84 */
+    --secondary-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 240 20% 12%; /* Muted background #1c1c2a */
+    --muted-foreground: 240 5% 65%; /* Muted text #a0a0a8 */
 
-    --accent: 183 100% 50%; /* ZAO neon accent #00F5FF */
-    --accent-foreground: 210 40% 98%;
+    --accent: 183 100% 50%; /* ZAO neon cyan accent #00f5ff */
+    --accent-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%; /* Red #f03e3e */
+    --destructive-foreground: 0 0% 98%; /* Off-white text #fafafa */
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 240 20% 12%; /* Subtle border #1c1c2a */
+    --input: 240 20% 12%; /* Input background #1c1c2a */
+    --ring: 265 80% 60%; /* Ring matches primary #8a2be2 */
   }
 }
 
@@ -123,12 +125,12 @@
     @apply -translate-y-0.5;
   }
   
-  /* Shimmer effect for skeletons */
+  /* Shimmer effect for skeletons with ZAO colors */
   .shimmer {
     background: linear-gradient(90deg, 
-      theme('colors.zinc.800') 0%, 
-      theme('colors.zinc.700') 50%, 
-      theme('colors.zinc.800') 100%);
+      hsl(240 20% 6%) 0%, /* Dark background */
+      hsl(265 80% 30%) 50%, /* ZAO purple, darker variant */
+      hsl(240 20% 6%) 100%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
   }
