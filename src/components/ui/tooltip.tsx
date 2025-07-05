@@ -149,14 +149,23 @@ const Tooltip = ({
   );
 };
 
-const TooltipTrigger = ({ children }: { children: React.ReactNode }) => {
+interface TooltipTriggerProps {
+  children: React.ReactNode;
+  asChild?: boolean;
+}
+
+const TooltipTrigger = ({ children, asChild }: TooltipTriggerProps) => {
   return <>{children}</>;
 };
 
+interface TooltipContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  side?: "top" | "right" | "bottom" | "left";
+}
+
 const TooltipContent = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
+  TooltipContentProps
+>(({ className, side = "top", ...props }, ref) => {
   const { open } = React.useContext(TooltipContext);
   
   if (!open) return null;
@@ -166,6 +175,10 @@ const TooltipContent = React.forwardRef<
       ref={ref}
       className={cn(
         "z-50 overflow-hidden rounded-md border border-zinc-800 bg-zinc-950 px-3 py-1.5 text-xs text-zinc-50 shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+        side === "top" && "slide-in-from-bottom-2",
+        side === "bottom" && "slide-in-from-top-2",
+        side === "left" && "slide-in-from-right-2",
+        side === "right" && "slide-in-from-left-2",
         className
       )}
       {...props}
