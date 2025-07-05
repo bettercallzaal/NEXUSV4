@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 
 interface TooltipProps {
   children: React.ReactNode;
-  content: React.ReactNode;
+  content?: React.ReactNode;
   side?: "top" | "right" | "bottom" | "left";
   align?: "start" | "center" | "end";
   delayDuration?: number;
@@ -49,7 +49,26 @@ const Tooltip = ({
 }: TooltipProps) => {
   const [open, setOpen] = React.useState(false);
   const [position, setPosition] = React.useState({ top: 0, left: 0 });
+  const [tooltipContent, setTooltipContent] = React.useState<React.ReactNode>(content);
   const triggerRef = React.useRef<HTMLDivElement>(null);
+  
+  // Check if we're using compound components or direct content prop
+  const isCompoundComponent = React.Children.toArray(children).some(
+    child => React.isValidElement(child) && child.type === TooltipContent
+  );
+
+  // Extract content from TooltipContent if using compound components
+  React.useEffect(() => {
+    if (isCompoundComponent) {
+      React.Children.forEach(children, child => {
+        if (React.isValidElement(child) && child.type === TooltipContent) {
+          setTooltipContent(child.props.children);
+        }
+      });
+    } else {
+      setTooltipContent(content);
+    }
+  }, [children, content, isCompoundComponent]);
   
   const handleMouseEnter = React.useCallback(() => {
     const timer = setTimeout(() => {
@@ -100,8 +119,13 @@ const Tooltip = ({
       onFocus={handleMouseEnter}
       onBlur={handleMouseLeave}
     >
-      {children}
-      {open && (
+      {isCompoundComponent ? React.Children.map(children, child => {
+        if (React.isValidElement(child) && child.type === TooltipContent) {
+          return null; // Don't render TooltipContent directly
+        }
+        return child;
+      }) : children}
+      {open && tooltipContent && (
         <div 
           className={cn(
             "absolute z-50 rounded-md border border-zinc-800 bg-zinc-950 px-3 py-1.5 text-xs text-zinc-50 shadow-md animate-in fade-in-0 zoom-in-95",
@@ -118,7 +142,7 @@ const Tooltip = ({
             transform: `translate(${side === "right" ? "0" : side === "left" ? "-100%" : "-50%"}, ${side === "bottom" ? "0" : side === "top" ? "-100%" : "-50%"})`,
           }}
         >
-          {content}
+          {tooltipContent}
         </div>
       )}
     </div>
