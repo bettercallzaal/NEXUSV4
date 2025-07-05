@@ -8,11 +8,16 @@ import { cn } from "@/lib/utils";
 
 interface LinkCardProps {
   link: Link & { category?: string; subcategory?: string; tags?: string[] };
+  tags?: string[];
+  isNew?: boolean;
   className?: string;
   onClick?: () => void;
 }
 
-export function LinkCard({ link, className, onClick }: LinkCardProps) {
+export function LinkCard({ link, tags: propTags, isNew: propIsNew, className, onClick }: LinkCardProps) {
+  // Use props or link properties
+  const finalTags = propTags || link.tags;
+  const finalIsNew = propIsNew !== undefined ? propIsNew : link.isNew;
   const [copied, setCopied] = React.useState(false);
 
   const copyToClipboard = (e: React.MouseEvent) => {
@@ -33,9 +38,16 @@ export function LinkCard({ link, className, onClick }: LinkCardProps) {
         onClick={onClick}
       >
         <div className="mb-1 flex items-start justify-between">
-          <h3 className="line-clamp-1 font-heading text-lg font-semibold text-foreground">
-            {link.title}
-          </h3>
+          <div className="flex items-center gap-2">
+            <h3 className="line-clamp-1 font-heading text-lg font-semibold text-foreground">
+              {link.title}
+            </h3>
+            {finalIsNew && (
+              <span className="rounded-full bg-accent/20 px-2 py-0.5 text-xs text-accent">
+                New
+              </span>
+            )}
+          </div>
           <div className="flex items-center space-x-1">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -74,9 +86,9 @@ export function LinkCard({ link, className, onClick }: LinkCardProps) {
           {link.description}
         </p>
         
-        {link.tags && link.tags.length > 0 && (
+        {finalTags && finalTags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1">
-            {link.tags.map((tag) => (
+            {finalTags.map((tag) => (
               <span
                 key={tag}
                 className="rounded bg-accent/20 px-2 py-0.5 text-xs text-accent"
