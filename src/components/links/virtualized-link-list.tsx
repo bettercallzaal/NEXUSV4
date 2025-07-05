@@ -312,14 +312,8 @@ export function VirtualizedLinkList({ data, filterTags = [] }: VirtualizedLinkLi
   }, []);
   
   // Handle accordion state
-  const handleAccordionChange = useCallback((value: string) => {
-    setExpandedCategories(prev => {
-      if (prev.includes(value)) {
-        return prev.filter(v => v !== value);
-      } else {
-        return [...prev, value];
-      }
-    });
+  const handleAccordionChange = useCallback((value: string[]) => {
+    setExpandedCategories(value);
   }, []);
   
   // Render link item in grid view
@@ -329,8 +323,6 @@ export function VirtualizedLinkList({ data, filterTags = [] }: VirtualizedLinkLi
       <div style={style} className="p-2">
         <LinkCard 
           link={link}
-          tags={link.tags || []}
-          isNew={link.isNew || false}
         />
       </div>
     );
