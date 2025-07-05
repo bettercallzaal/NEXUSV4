@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { LinksData } from '@/types/links';
+import { Data } from '@/types/links';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const dataset = searchParams.get('dataset') || 'default';
   
   try {
-    let linksData: LinksData;
+    let linksData: Data;
     
     if (dataset === 'large') {
       // Try to load the large dataset

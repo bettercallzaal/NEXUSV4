@@ -61,6 +61,7 @@ interface Data {
 
 interface VirtualizedLinkListProps {
   data: Data;
+  filterTags?: string[];
 }
 
 type ViewMode = "grid" | "list";
@@ -73,7 +74,7 @@ interface FlattenedLink extends Link {
   isNew?: boolean;
 }
 
-export function VirtualizedLinkList({ data }: VirtualizedLinkListProps) {
+export function VirtualizedLinkList({ data, filterTags = [] }: VirtualizedLinkListProps) {
   // Main state
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -231,7 +232,7 @@ export function VirtualizedLinkList({ data }: VirtualizedLinkListProps) {
     return counts;
   }, [allLinks]);
   
-  // Filter links based on search, category, subcategory, and tags
+  // Filter links based on current selections
   const filteredLinks = useMemo(() => {
     let filtered = [...allLinks];
     
@@ -245,28 +246,29 @@ export function VirtualizedLinkList({ data }: VirtualizedLinkListProps) {
       filtered = filtered.filter(link => link.subcategory === selectedSubcategory);
     }
     
-    // Filter by tags
-    if (selectedTags.length > 0) {
+    // Filter by tags (both internal selected tags and external filter tags)
+    const tagsToFilter = [...selectedTags, ...filterTags];
+    if (tagsToFilter.length > 0) {
       filtered = filtered.filter(link => {
-        if (!link.tags) return false;
-        return selectedTags.every(tag => link.tags!.includes(tag));
+        if (!link.tags || link.tags.length === 0) return false;
+        return tagsToFilter.some(tag => link.tags?.includes(tag));
       });
     }
     
     // Search by query
     if (searchQuery.trim()) {
       const fuse = new Fuse(filtered, {
-        keys: ['title', 'description', 'category', 'subcategory', 'tags'],
-        threshold: 0.3,
-        includeScore: true
+        keys: ['title', 'description', 'url', 'category', 'subcategory'],
+        threshold: 0.4,
+        includeMatches: true,
       });
       
-      const searchResults = fuse.search(searchQuery);
-      filtered = searchResults.map(result => result.item);
+      const results = fuse.search(searchQuery);
+      filtered = results.map(result => result.item);
     }
     
     return filtered;
-  }, [allLinks, searchQuery, selectedCategory, selectedSubcategory, selectedTags]);
+  }, [allLinks, selectedCategory, selectedSubcategory, selectedTags, filterTags, searchQuery]);
   
   // Handle category selection
   const handleCategorySelect = useCallback((category: string) => {
