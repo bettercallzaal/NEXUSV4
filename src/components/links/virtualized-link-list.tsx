@@ -24,14 +24,16 @@ import { WalletConnectButton } from "@/components/wallet/connect-button";
 
 // Define types for our data structure
 interface Link {
-  id: string;
+  id?: string;
   title: string;
   url: string;
   description: string;
-  category: string;
-  subcategory: string;
+  category?: string;
+  subcategory?: string;
   tags?: string[];
   isNew?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 interface Subcategory {
@@ -69,7 +71,7 @@ type ViewMode = "grid" | "list";
 interface FlattenedLink extends Link {
   category: string;
   subcategory: string;
-  id: string;
+  id?: string;
   tags?: string[];
   isNew?: boolean;
 }
@@ -337,14 +339,14 @@ export function VirtualizedLinkList({ data, filterTags = [] }: VirtualizedLinkLi
   // Render link item in list view
   const LinkListItem = useCallback(({ index, style }: { index: number; style: React.CSSProperties }) => {
     const link = filteredLinks[index];
-    const isExpanded = expandedLinks.has(link.id);
+    const isExpanded = link.id ? expandedLinks.has(link.id) : false;
     
     return (
       <div style={style} className="px-2">
         <LinkRow
           link={link}
           isExpanded={isExpanded}
-          onToggleExpand={() => toggleLinkExpansion(link.id)}
+          onToggleExpand={() => link.id ? toggleLinkExpansion(link.id) : undefined}
           tags={link.tags || []}
           isNew={link.isNew || false}
         />
