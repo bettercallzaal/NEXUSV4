@@ -437,7 +437,7 @@ export function VirtualizedLinkList({ data, filterTags = [] }: VirtualizedLinkLi
                 key={tag}
                 tag={tag}
                 count={tagCounts[tag]}
-                selected={selectedTags.includes(tag)}
+                active={selectedTags.includes(tag)}
                 onClick={() => handleTagSelect(tag)}
               />
             ))}
